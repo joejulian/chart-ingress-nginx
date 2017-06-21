@@ -3,7 +3,14 @@
 ### Source of Material
 Grabbed from [github.com/kubernetes/ingress](https://github.com/kubernetes/ingress/tree/master/examples/rbac/nginx)
 
+### Note for RBAC-enabled clusters
+
+Tiller requires special privileges in order to create the RBAC roles.  Giving tiller admin rights is sufficient.
+
+If you are unsure, you may need to review [this helm issue](https://github.com/kubernetes/helm/issues/2224)
+
 ## Installation
+
 Install this in your cluster with [Helm](https://github.com/kubernetes/helm):
 
 ```
