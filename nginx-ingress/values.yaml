@@ -20,7 +20,7 @@ ingressController:
 defaultBackend:
   image: gcr.io/google_containers/defaultbackend
   version: "1.3"
-  servicePath: {{ .Release.Namespace }}/default-http-backend
+  namespace:
   resources:
     memory: 20Mi
     cpu: 10m

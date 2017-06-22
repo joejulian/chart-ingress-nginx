@@ -26,7 +26,11 @@ spec:
           image: {{.Values.ingressController.image}}:{{.Values.ingressController.version}}
           args:
              - /nginx-ingress-controller
-             - --default-backend-service={{ .Values.defaultBackend.servicePath }}
+             {{- if .Values.defaultBackend.namespace }}
+             - --default-backend-service={{ .Values.defaultBackend.namespace }}/default-http-backend
+             {{- else }}
+             - --default-backend-service={{ .Release.Namespace }}/default-http-backend
+             {{- end}}
              - --default-ssl-certificate=$(POD_NAMESPACE)/tls-certificate
           env:
              - name: POD_NAME
