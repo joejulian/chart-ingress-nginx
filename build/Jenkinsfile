@@ -8,6 +8,10 @@ podTemplate(label: 'chart-ingress-nginx', containers: [
             stage('checkout') {
                 checkout scm
             }
+            
+            stage('Work around helm home inconsistency with jenkins user') {
+                kubesh('ln -sf /etc/helm ~/.helm')
+            }
 
             stage('set release') {
                 kubesh('CHART_VER=$(git describe --tags --abbrev=0 | sed "s/^v//") CHART_REL=$(git rev-list --count HEAD) envsubst < build/Chart.yaml.in > nginx-ingress/Chart.yaml')
@@ -23,8 +27,9 @@ podTemplate(label: 'chart-ingress-nginx', containers: [
                 }
             }
         }
-
     }
+
+}
 }
 
 def kubesh(command) {
