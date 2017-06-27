@@ -24,7 +24,7 @@ podTemplate(label: 'chart-ingress-nginx', containers: [
             stage('release the release') {
                 if (env.BRANCH_NAME == "master") {
                     withCredentials([usernamePassword(credentialsId: 'quay_key', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        kubesh('helm registry login quay.io -u $USERNAME -p $PASSWORD && cd nginx-ingress && helm registry push quay.io/samsung_cnct/nginx-ingress -c stable')
+                        kubesh("helm registry login quay.io -u $USERNAME -p $PASSWORD && cd nginx-ingress && helm registry push quay.io/samsung_cnct/nginx-ingress -c stable")
                     }
                 } else {
                     echo 'not master branch, not pushing to docker repo'
