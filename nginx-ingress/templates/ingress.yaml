@@ -20,7 +20,7 @@ spec:
       labels:
         k8s-app: nginx-ingress-lb
     spec:
-      serviceAccountName: nginx-ingress-serviceaccount
+      serviceAccountName: {{ .Release.Name }}-nginx-ingress-serviceaccount
       containers:
         - name: nginx-ingress-controller
           image: {{.Values.ingressController.image}}:{{.Values.ingressController.version}}
