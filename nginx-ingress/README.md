@@ -71,6 +71,34 @@ Customize your installation by customizing these default values:
   Sets the bucket size for the server names hash tables. The default value
   depends on the size of the processor's cache line.
 
+### tcpServices
+These are parameters for tcp services (cannot be routed based on hostname)
+
+**`tcpServices.enabled`** (default: `false`)
+
+Whether or not tcpservices are enabled
+
+**`tcpServices.mappings`** (default: empty)
+
+  This is an array of ports that should be handled by the ingress controller 
+  and where to map them
+  
+  They are represented by an array similar to:
+  
+  ```yaml
+  mappings:
+  - name: ssh
+    number: 22
+    namespace: mynamespace
+    service: myservice
+    targetPort: 22
+  - name: redis
+    number: 6379
+    namespace: mynamespace
+    service: myservice
+    targetPort: 6379
+```
+
 ### ingressController
 These are parameters for the actual ingress controller (nginx)
 
