@@ -38,6 +38,9 @@ spec:
              {{- if .Values.ingressController.class }}
              - --ingress-class {{ .Values.ingressController.class }}
              {{- end }}
+             {{- if .Values.tcpServices.enabled }}
+             - --tcp-services-configmap=$(POD_NAMESPACE)/{{ .Chart.Name }}-tcpservices-configmap
+             {{- end }}
           env:
              - name: POD_NAME
                valueFrom:
@@ -51,4 +54,10 @@ spec:
           {{- range .Values.ingressController.ports}}
           - name: {{ .name }}
             containerPort: {{ .number }}
+          {{- end }}
+          {{- if .Values.tcpServices.enabled }}
+          {{- range .Values.tcpServices.mappings }}
+          - name: {{ .name }}
+            containerPort: {{ .number }}
+          {{- end }}
           {{- end }}

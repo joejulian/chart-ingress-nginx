@@ -1,0 +1,17 @@
+{{- if .Values.tcpServices.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    heritage: {{.Release.Service | quote }}
+    release: {{.Release.Name | quote }}
+    chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+    component: "{{ .Release.Name }}-nginx-ingress"
+  annotations:
+    "helm.sh/created": {{.Release.Time.Seconds | quote }}
+  name: "{{ .Chart.Name }}-tcpservices-configmap"
+data:
+  {{- range .Values.tcpServices.mappings }}
+  {{ .number }}: "{{ .namespace }}/{{ .service }}:{{.destinationPort}}"
+  {{- end }}
+{{- end }}
