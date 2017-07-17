@@ -32,6 +32,12 @@ spec:
              - --default-backend-service={{ .Release.Namespace }}/default-http-backend
              {{- end}}
              - --default-ssl-certificate=$(POD_NAMESPACE)/tls-certificate
+             {{- if .Values.ingressController.namespace }}
+             - --watch-namespace {{ .Values.ingressController.namespace }}
+             {{- end }}
+             {{- if .Values.ingressController.class }}
+             - --ingress-class {{ .Values.ingressController.class }}
+             {{- end }}
           env:
              - name: POD_NAME
                valueFrom:

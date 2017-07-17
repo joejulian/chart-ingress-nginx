@@ -100,6 +100,18 @@ These are parameters for the actual ingress controller (nginx)
     number: 443
 ```
 
+**`ingressController.class`** (default: empty - `nginx`)
+
+Allows the ingress controller to pay attention to a specific ingress class.  Useful when multiple 
+ingress controllers are being deployed to the same cluster
+
+**`ingressController.namespace`** (default: empty - all domains)
+
+Allows the ingress controller to pay attention to a specific namespace.  Useful when multiple 
+ingress controllers are being deployed to the same cluster and one wants to ensure a ingress 
+controller is only concerning itself with a specific namespace
+
+
 ### defaultBackend
 
 Configuration for the default backend webserver

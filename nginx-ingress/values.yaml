@@ -16,6 +16,8 @@ ingressController:
   - name: https
     number: 443
   replicas: 2
+#  class: specialClass
+#  namespace: namespace
 
 defaultBackend:
   image: gcr.io/google_containers/defaultbackend
