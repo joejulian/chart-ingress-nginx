@@ -27,9 +27,9 @@ spec:
           args:
              - /nginx-ingress-controller
              {{- if .Values.defaultBackend.namespace }}
-             - --default-backend-service={{ .Values.defaultBackend.namespace }}/default-http-backend
+             - --default-backend-service={{ .Values.defaultBackend.namespace }}/{{ .Release.Name }}-default-http-backend
              {{- else }}
-             - --default-backend-service={{ .Release.Namespace }}/default-http-backend
+             - --default-backend-service={{ .Release.Namespace }}/{{ .Release.Name }}-default-http-backend
              {{- end}}
              - --default-ssl-certificate=$(POD_NAMESPACE)/tls-certificate
              {{- if .Values.ingressController.namespace }}

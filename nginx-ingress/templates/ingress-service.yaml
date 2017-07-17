@@ -35,5 +35,13 @@ spec:
     protocol: TCP
   {{- end}}
   {{- end}}
+  {{- if .Values.tcpServices.enabled}}
+  {{- range .Values.tcpServices.mappings}}
+  - name: {{ .name}}
+    port: {{ .number}}
+    targetPort: {{ .number}}
+    protocol: TCP
+  {{- end}}
+  {{- end}}
   selector:
     k8s-app: {{ .Release.Name }}-nginx-ingress-lb

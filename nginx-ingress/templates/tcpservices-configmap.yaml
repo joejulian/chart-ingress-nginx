@@ -12,6 +12,6 @@ metadata:
   name: "{{ .Chart.Name }}-tcpservices-configmap"
 data:
   {{- range .Values.tcpServices.mappings }}
-  {{ .number }}: "{{ .namespace }}/{{ .service }}:{{.destinationPort}}"
+  {{ .number }}: "{{ .namespace }}/{{ .service }}:{{.targetPort}}"
   {{- end }}
 {{- end }}
