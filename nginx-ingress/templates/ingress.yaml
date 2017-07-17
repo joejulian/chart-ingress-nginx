@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: nginx-ingress-controller
+  name: {{ .Release.Name }}-nginx-ingress-controller
   labels:
     heritage: {{.Release.Service | quote }}
     release: {{.Release.Name | quote }}
@@ -14,24 +14,33 @@ spec:
   replicas: {{.Values.ingressController.replicas}}
   selector:
     matchLabels:
-        k8s-app: nginx-ingress-lb
+        k8s-app: {{ .Release.Name }}-nginx-ingress-lb
   template:
     metadata:
       labels:
-        k8s-app: nginx-ingress-lb
+        k8s-app: {{ .Release.Name }}-nginx-ingress-lb
     spec:
-      serviceAccountName: nginx-ingress-serviceaccount
+      serviceAccountName: {{ .Release.Name }}-nginx-ingress-serviceaccount
       containers:
         - name: nginx-ingress-controller
           image: {{.Values.ingressController.image}}:{{.Values.ingressController.version}}
           args:
              - /nginx-ingress-controller
              {{- if .Values.defaultBackend.namespace }}
-             - --default-backend-service={{ .Values.defaultBackend.namespace }}/default-http-backend
+             - --default-backend-service={{ .Values.defaultBackend.namespace }}/{{ .Release.Name }}-default-http-backend
              {{- else }}
-             - --default-backend-service={{ .Release.Namespace }}/default-http-backend
+             - --default-backend-service={{ .Release.Namespace }}/{{ .Release.Name }}-default-http-backend
              {{- end}}
              - --default-ssl-certificate=$(POD_NAMESPACE)/tls-certificate
+             {{- if .Values.ingressController.namespace }}
+             - --watch-namespace={{ .Values.ingressController.namespace }}
+             {{- end }}
+             {{- if .Values.ingressController.class }}
+             - --ingress-class={{ .Values.ingressController.class }}
+             {{- end }}
+             {{- if .Values.tcpServices.enabled }}
+             - --tcp-services-configmap=$(POD_NAMESPACE)/{{ .Chart.Name }}-tcpservices-configmap
+             {{- end }}
           env:
              - name: POD_NAME
                valueFrom:
@@ -45,4 +54,10 @@ spec:
           {{- range .Values.ingressController.ports}}
           - name: {{ .name }}
             containerPort: {{ .number }}
+          {{- end }}
+          {{- if .Values.tcpServices.enabled }}
+          {{- range .Values.tcpServices.mappings }}
+          - name: {{ .name }}
+            containerPort: {{ .number }}
+          {{- end }}
           {{- end }}

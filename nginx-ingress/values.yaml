@@ -7,6 +7,16 @@ configuration:
   proxySendTimeout: 600
   serverNameHashBucketSize: 256
 
+tcpServices:
+  enabled: false
+#  mappings:
+#  - name: ssh
+#    number: 22
+#    namespace: mynamespace
+#    service: myservice
+#    targetPort: 22
+
+
 ingressController:
   image: gcr.io/google_containers/nginx-ingress-controller
   version: "0.9.0-beta.8"
@@ -16,6 +26,8 @@ ingressController:
   - name: https
     number: 443
   replicas: 2
+#  class: myclass
+#  namespace: mynamespace
 
 defaultBackend:
   image: gcr.io/google_containers/defaultbackend
