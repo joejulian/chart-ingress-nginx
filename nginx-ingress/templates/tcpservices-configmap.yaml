@@ -9,9 +9,9 @@ metadata:
     component: "{{ .Release.Name }}-nginx-ingress"
   annotations:
     "helm.sh/created": {{.Release.Time.Seconds | quote }}
-  name: "{{ .Chart.Name }}-tcpservices-configmap"
+  name: "{{ .Release.Name }}-tcpservices-configmap"
 data:
   {{- range .Values.tcpServices.mappings }}
-  {{ .number }}: "{{ .namespace }}/{{ .service }}:{{.targetPort}}"
+  "{{ .number }}": "{{ .namespace }}/{{ .service }}:{{.targetPort}}"
   {{- end }}
 {{- end }}

@@ -39,7 +39,7 @@ spec:
              - --ingress-class={{ .Values.ingressController.class }}
              {{- end }}
              {{- if .Values.tcpServices.enabled }}
-             - --tcp-services-configmap=$(POD_NAMESPACE)/{{ .Chart.Name }}-tcpservices-configmap
+             - --tcp-services-configmap=$(POD_NAMESPACE)/{{ .Release.Name }}-tcpservices-configmap
              {{- end }}
           env:
              - name: POD_NAME
