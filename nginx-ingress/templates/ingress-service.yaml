@@ -2,13 +2,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-nginx-ingress
+  name: {{ .Release.Name }}-service
+  namespace: {{ .Release.Namespace }}
   labels:
-    name: {{ .Release.Name }}-nginx-ingress
+    name: {{ .Release.Name }}-service
     heritage: {{.Release.Service | quote }}
     release: {{.Release.Name | quote }}
     chart: "{{.Chart.Name}}-{{.Chart.Version}}"
-    component: "{{.Release.Name}}-nginx-ingress"
+    component: "{{.Release.Name}}"
   annotations:
     "helm.sh/created": {{.Release.Time.Seconds | quote }}
 spec:
@@ -44,4 +45,4 @@ spec:
   {{- end}}
   {{- end}}
   selector:
-    k8s-app: {{ .Release.Name }}-nginx-ingress-lb
+    k8s-app: {{ .Release.Name }}-lb
