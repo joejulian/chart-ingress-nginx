@@ -19,7 +19,7 @@ tcpServices:
 
 ingressController:
   image: gcr.io/google_containers/nginx-ingress-controller
-  version: "0.9.0-beta.8"
+  version: "0.9.0-beta.11"
   ports:
   - name: http
     number: 80
