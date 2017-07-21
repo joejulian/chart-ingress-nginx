@@ -2,27 +2,28 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-nginx-ingress-controller
+  name: {{ .Release.Name }}-controller
+  namespace: {{ .Release.Namespace }}
   labels:
     heritage: {{.Release.Service | quote }}
     release: {{.Release.Name | quote }}
     chart: "{{.Chart.Name}}-{{.Chart.Version}}"
-    component: "{{.Release.Name}}-nginx-ingress"
+    component: "{{.Release.Name}}"
   annotations:
     "helm.sh/created": {{.Release.Time.Seconds | quote }}
 spec:
   replicas: {{.Values.ingressController.replicas}}
   selector:
     matchLabels:
-        k8s-app: {{ .Release.Name }}-nginx-ingress-lb
+        k8s-app: {{ .Release.Name }}-lb
   template:
     metadata:
       labels:
-        k8s-app: {{ .Release.Name }}-nginx-ingress-lb
+        k8s-app: {{ .Release.Name }}-lb
     spec:
-      serviceAccountName: {{ .Release.Name }}-nginx-ingress-serviceaccount
+      serviceAccountName: {{ .Release.Name }}-serviceaccount
       containers:
-        - name: nginx-ingress-controller
+        - name: {{ .Release.Name }}-controller
           image: {{.Values.ingressController.image}}:{{.Values.ingressController.version}}
           args:
              - /nginx-ingress-controller
@@ -46,7 +47,7 @@ spec:
                valueFrom:
                  fieldRef:
                    fieldPath: metadata.name
-               name: POD_NAMESPACE
+             - name: POD_NAMESPACE
                valueFrom:
                  fieldRef:
                    fieldPath: metadata.namespace
