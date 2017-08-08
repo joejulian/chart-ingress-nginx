@@ -1,0 +1,166 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-load-balancer-conf
+  namespace: {{ .Release.Namespace }}
+  labels:
+    heritage: {{.Release.Service | quote }}
+    release: {{.Release.Name | quote }}
+    chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+    component: "{{.Release.Name}}"
+  annotations:
+    "helm.sh/created": {{.Release.Time.Seconds | quote }}
+data:
+  {{- if .Values.configuration.proxyBufferSize }}
+  proxy-buffer-size: {{ .Values.configuration.proxyBufferSize | quote }}
+  {{- end }}
+  {{- if .Values.configuration.customHttpErrors }}
+  custom-http-errors: {{ .Values.configuration.customHttpErrors | quote }}
+  {{- end }}
+  {{- if .Values.configuration.disableAccessLog }}
+  disable-access-log: {{ .Values.configuration.disableAccessLog | quote }}
+  {{- end }}
+  {{- if .Values.configuration.disableIPv6 }}
+  disable-ipv6: {{ .Values.configuration.disableIPv6 | quote }}
+  {{- end }}
+  {{- if .Values.configuration.enableDynamicTLSRecords }}
+  enable-dynamic-tls-records: {{ .Values.configuration.enableDynamicTLSRecords | quote }}
+  {{- end }}
+  {{- if .Values.configuration.enableUnderscoresInHeaders }}
+  enable-underscores-in-headers: {{ .Values.configuration.enableUnderscoresInHeaders | quote }}
+  {{- end }}
+  {{- if .Values.configuration.enableVtsStatus }}
+  enable-vts-status: {{ .Values.configuration.enableVtsStatus | quote }}
+  {{- end }}
+  {{- if .Values.configuration.errorLogLevel }}
+  error-log-level: {{ .Values.configuration.errorLogLevel | quote }}
+  {{- end }}
+  {{- if .Values.configuration.gzipTypes }}
+  gzip-types: {{ .Values.configuration.gzipTypes | quote }}
+  {{- end }}
+  {{- if .Values.configuration.hsts }}
+  hsts: {{ .Values.configuration.hsts | quote }}
+  {{- end }}
+  {{- if .Values.configuration.hstsIncludeSubdomains }}
+  hsts-include-subdomains: {{ .Values.configuration.hstsIncludeSubdomains | quote }}
+  {{- end }}
+  {{- if .Values.configuration.hstsMaxAge }}
+  hsts-max-age: {{ .Values.configuration.hstsMaxAge | quote }}
+  {{- end }}
+  {{- if .Values.configuration.hstsPreload }}
+  hsts-preload: {{ .Values.configuration.hstsPreload | quote }}
+  {{- end }}
+  {{- if .Values.configuration.ignoreInvalidHeaders }}
+  ignore-invalid-headers: {{ .Values.configuration.ignoreInvalidHeaders | quote }}
+  {{- end }}
+  {{- if .Values.configuration.keepAlive }}
+  keep-alive: {{ .Values.configuration.keepAlive | quote }}
+  {{- end }}
+  {{- if .Values.configuration.loadBalance }}
+  load-balance: {{ .Values.configuration.loadBalance | quote }}
+  {{- end }}
+  {{- if .Values.configuration.logFormatUpstream }}
+  log-format-upstream: {{ .Values.configuration.logFormatUpstream | quote }}
+  {{- end }}
+  {{- if .Values.configuration.logFormatStream }}
+  log-format-stream: {{ .Values.configuration.logFormatStream | quote }}
+  {{- end }}
+  {{- if .Values.configuration.maxWorkerConnections }}
+  max-worker-connections: {{ .Values.configuration.maxWorkerConnections | quote }}
+  {{- end }}
+  {{- if .Values.configuration.proxyBufferSize }}
+  proxy-buffer-size: {{ .Values.configuration.proxyBufferSize | quote }}
+  {{- end }}
+  {{- if .Values.configuration.proxyConnectTimeout }}
+  proxy-connect-timeout: {{ .Values.configuration.proxyConnectTimeout | quote }}
+  {{- end }}
+  {{- if .Values.configuration.proxyCookieDomain }}
+  proxy-cookie-domain: {{ .Values.configuration.proxyCookieDomain | quote }}
+  {{- end }}
+  {{- if .Values.configuration.proxyCookiePath }}
+  proxy-cookie-path: {{ .Values.configuration.proxyCookiePath | quote }}
+  {{- end }}
+  {{- if .Values.configuration.proxyReadTimeout }}
+  proxy-read-timeout: {{ .Values.configuration.proxyReadTimeout | quote }}
+  {{- end }}
+  {{- if .Values.configuration.proxySendTimeout }}
+  proxy-send-timeout: {{ .Values.configuration.proxySendTimeout | quote }}
+  {{- end }}
+  {{- if .Values.configuration.retryNonIdempotent }}
+  proxy-next-upstream: {{ .Values.configuration.retryNonIdempotent | quote }}
+  {{- end }}
+  {{- if .Values.configuration.serverNameHashBucketSize }}
+  retry-non-idempotent: {{ .Values.configuration.serverNameHashBucketSize | quote }}
+  {{- end }}
+  {{- if .Values.configuration.serverNameHashMaxSize }}
+  server-name-hash-bucket-size: {{ .Values.configuration.serverNameHashMaxSize | quote }}
+  {{- end }}
+  {{- if .Values.configuration.proxyHeadersHashBucketSize }}
+  server-name-hash-max-size: {{ .Values.configuration.proxyHeadersHashBucketSize | quote }}
+  {{- end }}
+  {{- if .Values.configuration.proxyHeadersHashMaxSize }}
+  proxy-headers-hash-bucket-size: {{ .Values.configuration.proxyHeadersHashMaxSize | quote }}
+  {{- end }}
+  {{- if .Values.configuration.serverTokens }}
+  server-tokens: {{ .Values.configuration.serverTokens | quote }}
+  {{- end }}
+  {{- if .Values.configuration.mapHashBucketSize }}
+  map-hash-bucket-size: {{ .Values.configuration.mapHashBucketSize | quote }}
+  {{- end }}
+  {{- if .Values.configuration.sslBufferSize }}
+  ssl-buffer-size: {{ .Values.configuration.sslBufferSize | quote }}
+  {{- end }}
+  {{- if .Values.configuration.sslCiphers }}
+  ssl-ciphers: {{ .Values.configuration.sslCiphers | quote }}
+  {{- end }}
+  {{- if .Values.configuration.sslDHParam }}
+  ssl-dh-param: {{ .Values.configuration.sslDHParam | quote }}
+  {{- end }}
+  {{- if .Values.configuration.sslProtocols }}
+  ssl-protocols: {{ .Values.configuration.sslProtocols | quote }}
+  {{- end }}
+  {{- if .Values.configuration.sslRedirect }}
+  ssl-redirect: {{ .Values.configuration.sslRedirect | quote }}
+  {{- end }}
+  {{- if .Values.configuration.sslSessionCache }}
+  ssl-session-cache: {{ .Values.configuration.sslSessionCache | quote }}
+  {{- end }}
+  {{- if .Values.configuration.sslSessionCacheSize }}
+  ssl-session-cache-size: {{ .Values.configuration.sslSessionCacheSize | quote }}
+  {{- end }}
+  {{- if .Values.configuration.sslSessionTickets }}
+  ssl-session-tickets: {{ .Values.configuration.sslSessionTickets | quote }}
+  {{- end }}
+  {{- if .Values.configuration.sslSessionTimeout }}
+  ssl-session-timeout: {{ .Values.configuration.sslSessionTimeout | quote }}
+  {{- end }}
+  {{- if .Values.configuration.upstreamMaxFails }}
+  upstream-max-fails: {{ .Values.configuration.upstreamMaxFails | quote }}
+  {{- end }}
+  {{- if .Values.configuration.upstreamFailTimeout }}
+  upstream-fail-timeout: {{ .Values.configuration.upstreamFailTimeout | quote }}
+  {{- end }}
+  {{- if .Values.configuration.useGzip }}
+  use-gzip: {{ .Values.configuration.useGzip | quote }}
+  {{- end }}
+  {{- if .Values.configuration.useHttp2 }}
+  use-http2: {{ .Values.configuration.useHttp2 | quote }}
+  {{- end }}
+  {{- if .Values.configuration.useProxyProtocol }}
+  use-proxy-protocol: {{ .Values.configuration.useProxyProtocol | quote }}
+  {{- end }}
+  {{- if .Values.configuration.whitelistSourceRange }}
+  whitelist-source-range: {{ .Values.configuration.whitelistSourceRange | quote }}
+  {{- end }}
+  {{- if .Values.configuration.workerProcesses }}
+  worker-processes: {{ .Values.configuration.workerProcesses | quote }}
+  {{- end }}
+  {{- if .Values.configuration.limitConnZoneVariable }}
+  limit-conn-zone-variable: {{ .Values.configuration.limitConnZoneVariable | quote }}
+  {{- end }}
+  {{- if .Values.configuration.proxySetHeaders }}
+  proxy-set-headers: {{ .Values.configuration.proxySetHeaders | quote }}
+  {{- end }}
+  {{- if .Values.configuration.addHeaders }}
+  add-headers: {{ .Values.configuration.addHeaders | quote }}
+  {{- end }}

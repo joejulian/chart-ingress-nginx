@@ -42,6 +42,7 @@ spec:
              {{- if .Values.tcpServices.enabled }}
              - --tcp-services-configmap=$(POD_NAMESPACE)/{{ .Release.Name }}-tcpservices-configmap
              {{- end }}
+             - --configmap=$(POD_NAMESPACE)/{{ .Release.Name }}-load-balancer-conf
           env:
              - name: POD_NAME
                valueFrom:

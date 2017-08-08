@@ -1,11 +1,4 @@
-# Options for ConfigurationMap
-configuration:
-  bodySize: 64m
-  hstsIncludeSubdomains: "false"
-  proxyConnectTimeout: 15
-  proxyReadTimeout: 600
-  proxySendTimeout: 600
-  serverNameHashBucketSize: 256
+
 
 tcpServices:
   enabled: false
@@ -51,3 +44,59 @@ ingressService:
 #    protocol: TCP
   loadBalancerIP:
   externalName:
+
+
+## Options for ConfigurationMap
+## ref: https://github.com/kubernetes/ingress/blob/master/controllers/nginx/configuration.md#allowed-parameters-in-configuration-configmap
+configuration:
+#  proxyBodySize:
+#  customHttpErrors:
+#  disableAccessLog: "false"
+#  disableIPv6: "false"
+#  enableDynamicTLSRecords: "true"
+#  enableUnderscoresInHeaders: "false"
+#  enableVtsStatus: "false"
+#  errorLogLevel:
+#  gzipTypes: "text/html"
+#  hsts: "false"
+#  hstsIncludeSubdomains: "false"
+#  hstsMaxAge: 86400
+#  hstsPreload: "false"
+#  ignoreInvalidHeaders: "true"
+#  keepAlive: "75s"
+#  loadBalance: "round_robin"
+#  logFormatUpstream:
+#  logFormatStream:
+#  maxWorkerConnections:
+  proxyBufferSize: 16k
+#  proxyConnectTimeout: 15
+#  proxyCookieDomain:
+#  proxyCookiePath:
+#  proxyReadTimeout: 600
+#  proxySendTimeout: 600
+#  retryNonIdempotent: "false"
+#  serverNameHashBucketSize: 256
+#  serverNameHashMaxSize:
+#  proxyHeadersHashBucketSize:
+#  proxyHeadersHashMaxSize:
+#  serverTokens:
+#  mapHashBucketSize:
+#  sslBufferSize:
+#  sslCiphers:
+#  sslDHParam:
+#  sslProtocols:
+#  sslRedirect:
+#  sslSessionCache:
+#  sslSessionCacheSize:
+#  sslSessionTickets:
+#  sslSessionTimeout:
+#  upstreamMaxFails:
+#  upstreamFailTimeout:
+#  useGzip:
+#  useHttp2:
+#  useProxyProtocol:
+#  whitelistSourceRange:
+#  workerProcesses:
+#  limitConnZoneVariable:
+#  proxySetHeaders:
+#  addHeaders:
