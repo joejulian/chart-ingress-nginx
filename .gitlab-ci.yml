@@ -1,0 +1,29 @@
+image: $helm_registry_image:$helm_registry_version
+
+variables:
+  FAILFASTCI_NAMESPACE: joejulian-robot1
+  publish_branch: master
+  registry: quay.io
+  registry_useer: samsung_cnct
+  chart_name: nginx-ingress
+  robot_secret: quay-robot-nginx-ingress-rw
+  helm_registry_image: quay.io/samsunb_cnct/helm-registry-agent
+  helm_registry_version: v0.1.5
+
+stages:
+  - build
+  - test
+  - publish
+
+.before_script:
+  - helm registry login
+
+build_chart:
+  stage: build
+  script:
+    - CHART_VER=$$(git describe --tags --abbrev=0 | sed 's/^v//') CHART_REL=\$(git rev-list --count v$${CHART_VER}..HEAD) envsubst < Chart.yaml.in > ${chart_name}/Chart.yaml")
+
+helm_test:
+  stage: test
+  script:
+    - helm lint ${chart_name}
