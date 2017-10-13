@@ -1,3 +1,3 @@
 #! /bin/bash
 
-helm lint $1
+helm lint ${chart_name}

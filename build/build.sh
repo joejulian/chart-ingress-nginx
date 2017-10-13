@@ -1,9 +1,5 @@
 #! /bin/sh
 
-echo "chart_name='$chart_name'"
-
-exit 1
-
 CHART_VER=$(git describe --tags --abbrev=0 | sed 's/^v//')
 CHART_REL=$(git rev-list --count v$${CHART_VER}..HEAD)
 
