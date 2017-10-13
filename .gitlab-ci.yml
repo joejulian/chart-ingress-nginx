@@ -22,6 +22,12 @@ build_chart:
   script:
     - build/build.sh
 
+build_foo:
+  stage: build
+  script:
+    - echo "I'm a little teapot"
+
+
 helm_test:
   stage: test
   script:
