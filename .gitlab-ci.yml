@@ -6,7 +6,7 @@ variables:
   registry_user: joejulian
   chart_name: nginx-ingress
   robot_account: nginx_ingress
-  helm_registry_image: ${registry}/${registry_user}/helm-registry-agent
+  helm_registry_image: quay.io/samsung_cnct/helm-registry-agent
   helm_registry_version: v0.1.5
 
 stages:
