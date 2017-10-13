@@ -15,7 +15,7 @@ stages:
   - publish
 
 before_script:
-  - helm registry login -u ${registry_user}+${robot_account} -p ${REGISTRY_PASSWORD}
+  - helm registry login -u ${registry_user}+${robot_account} -p ${REGISTRY_PASSWORD} ${registry}
 
 build_chart:
   stage: build
