@@ -21,9 +21,9 @@ stages:
 build_chart:
   stage: build
   script:
-    - CHART_VER=$(git describe --tags --abbrev=0 | sed 's/^v//') CHART_REL=$(git rev-list --count v${CHART_VER}..HEAD) envsubst < Chart.yaml.in > ${chart_name}/Chart.yaml
+    - build/build.sh ${chart_name}
 
 helm_test:
   stage: test
   script:
-    - helm lint ${chart_name}
+    - build/test.sh ${chart_name}
