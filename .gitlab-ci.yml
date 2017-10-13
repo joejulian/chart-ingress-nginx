@@ -4,10 +4,10 @@ variables:
   FAILFASTCI_NAMESPACE: joejulian-robot1
   publish_branch: master
   registry: quay.io
-  registry_useer: samsung_cnct
+  registry_user: samsung_cnct
   chart_name: nginx-ingress
   robot_secret: quay-robot-nginx-ingress-rw
-  helm_registry_image: quay.io/samsunb_cnct/helm-registry-agent
+  helm_registry_image: ${registry}/${registry_user}/helm-registry-agent
   helm_registry_version: v0.1.5
 
 stages:
